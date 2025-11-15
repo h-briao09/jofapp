@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santuário de Fátima - Escola Marista</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset e variáveis */
+        :root {
+            --azul-mariano: #1e3a8a;
+            --azul-claro: #3b82f6;
+            --dourado: #b8860b;
+            --dourado-claro: #daa520;
+            --branco: #ffffff;
+            --cinza-claro: #f8f9fa;
+            --cinza-escuro: #343a40;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--cinza-claro);
+            color: var(--cinza-escuro);
+            line-height: 1.6;
+        }
+        
+        /* Tipografia */
+        h1, h2, h3, h4 {
+            font-family: 'Georgia', serif;
+            color: var(--azul-mariano);
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--dourado);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Layout geral */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--branco);
+        }
+        
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(rgba(30, 58, 138, 0.85), rgba(30, 58, 138, 0.9)), 
+                        url('https://images.unsplash.com/photo-1518834107812-67d22d13e2a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--branco);
+            text-align: center;
+            padding: 6rem 1rem;
+            position: relative;
+        }
+        
+        .logo-container {
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--dourado);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Navegação */
+        nav {
+            background-color: var(--azul-mariano);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo-small {
+            color: var(--dourado);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--dourado);
+        }
+        
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--branco);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Seção de introdução */
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .intro-text h2 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .intro-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .valores-maristas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .valor {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--branco);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .valor:hover {
+            transform: translateY(-5px);
+        }
+        
+        .valor i {
+            font-size: 2rem;
+            color: var(--dourado);
+            margin-bottom: 1rem;
+        }
+        
+        /* Seção de milagres */
+        .milagres-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .milagres-timeline {
+            position: relative;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--dourado);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background-color: var(--dourado-claro);
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--azul-mariano);
+            margin-bottom: 0.5rem;
+        }
+        
+        .segredos-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .segredo {
+            background-color: var(--cinza-claro);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--azul-mariano);
+        }
+        
+        .segredo h3 {
+            color: var(--azul-mariano);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Seção de orações */
+        .oracoes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .oracao-card {
+            background-color: var(--branco);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .oracao-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .oracao-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .oracao-icon {
+            font-size: 2rem;
+            color: var(--dourado);
+            margin-right: 1rem;
+        }
+        
+        .oracao-texto {
+            flex-grow: 1;
+            font-style: italic;
+            line-height: 1.8;
+        }
+        
+        .oracao-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background-color: var(--azul-mariano);
+            color: var(--branco);
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--azul-claro);
+        }
+        
+        .btn-dourado {
+            background-color: var(--dourado);
+        }
+        
+        .btn-dourado:hover {
+            background-color: var(--dourado-claro);
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: var(--cinza-escuro);
+            color: var(--branco);
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--dourado);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: var(--dourado);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--dourado);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .intro-content, .milagres-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .valores-maristas {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--azul-mariano);
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+                padding: 0.7rem 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .oracoes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                padding: 4rem 1rem;
+            }
+            
+            section {
+                padding: 2.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <i class="fas fa-church logo"></i>
+                <h1>Santuário de Fátima</h1>
+                <p class="subtitle">Escola Marista - Um espaço de fé, esperança e caridade</p>
+            </div>
+            <a href="#oracoes" class="btn btn-dourado">Fazer uma Oração</a>
+        </div>
+    </header>
+
+    <!-- Navegação -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo-small">Santuário de Fátima</div>
+            <button class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#introducao">Santuário</a></li>
+                <li><a href="#milagres">Milagres</a></li>
+                <li><a href="#oracoes">Orações</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Seção de Introdução -->
+    <section id="introducao">
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h2>Bem-vindo ao Santuário de Fátima</h2>
+                    <p>O Santuário de Fátima da Escola Marista é um espaço dedicado à espiritualidade, ao acolhimento e à vivência dos valores cristãos. Inspirados pelas aparições de Nossa Senhora em Fátima, Portugal, buscamos cultivar a fé, a esperança e a caridade em nossa comunidade escolar.</p>
+                    <p>Este santuário é um local de oração, reflexão e encontro com Deus, aberto a todos os estudantes, educadores, famílias e membros da comunidade que desejam aprofundar sua vida espiritual.</p>
+                    
+                    <div class="valores-maristas">
+                        <div class="valor">
+                            <i class="fas fa-heart"></i>
+                            <h3>Fé</h3>
+                            <p>Cultivamos uma relação pessoal com Deus através da oração e dos sacramentos.</p>
+                        </div>
+                        <div class="valor">
+                            <i class="fas fa-hands-helping"></i>
+                            <h3>Solidariedade</h3>
+                            <p>Vivemos a caridade cristã no serviço aos mais necessitados.</p>
+                        </div>
+                        <div class="valor">
+                            <i class="fas fa-users"></i>
+                            <h3>Comunidade</h3>
+                            <p>Formamos uma família unida pelo amor e pela partilha.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-image">
+                    <img src="https://images.unsplash.com/photo-1544830297-71c5d6fa6b6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Interior da Igreja">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Milagres -->
+    <section id="milagres">
+        <div class="container">
+            <h2>Os Milagres de Fátima</h2>
+            <p>As aparições de Nossa Senhora em Fátima, Portugal, em 1917, foram marcadas por mensagens de paz, conversão e oração. Conheça os principais eventos e segredos revelados aos três pastorinhos.</p>
+            
+            <div class="milagres-container">
+                <div class="milagres-timeline">
+                    <h3>Linha do Tempo</h3>
+                    <div class="timeline-item">
+                        <div class="timeline-date">13 de Maio de 1917</div>
+                        <p>Primeira aparição de Nossa Senhora aos três pastorinhos: Lúcia, Francisco e Jacinta.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">13 de Junho de 1917</div>
+                        <p>Segunda aparição. Nossa Senhora revela que Francisco e Jacinta irão para o Céu em breve.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">13 de Julho de 1917</div>
+                        <p>Terceira aparição. Revelação dos três segredos de Fátima e a visão do inferno.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">13 de Outubro de 1917</div>
+                        <p>Última aparição e o milagre do sol, testemunhado por milhares de pessoas.</p>
+                    </div>
+                </div>
+                
+                <div class="segredos-container">
+                    <h3>Os Três Segredos</h3>
+                    <div class="segredo">
+                        <h4>Primeiro Segredo</h4>
+                        <p>A visão do inferno, mostrando a terrível realidade para onde vão as almas dos pecadores.</p>
+                    </div>
+                    <div class="segredo">
+                        <h4>Segundo Segredo</h4>
+                        <p>A devoção ao Imaculado Coração de Maria e a profecia sobre o fim da Primeira Guerra Mundial e o início da Segunda.</p>
+                    </div>
+                    <div class="segredo">
+                        <h4>Terceiro Segredo</h4>
+                        <p>A visão de um "Bispo vestido de Branco" e outros religiosos sendo martirizados, interpretado como a perseguição à Igreja no século XX.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Orações -->
+    <section id="oracoes">
+        <div class="container">
+            <h2>Orações para Meditação</h2>
+            <p>Encontre paz e consolo através destas orações inspiradas na devoção a Nossa Senhora de Fátima.</p>
+            
+            <div class="oracoes-grid">
+                <div class="oracao-card">
+                    <div class="oracao-header">
+                        <i class="fas fa-praying-hands oracao-icon"></i>
+                        <h3>Oração de Fátima</h3>
+                    </div>
+                    <div class="oracao-texto">
+                        <p>"Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o Céu e socorrei principalmente as que mais precisarem. Ó Jesus, é por Vosso amor, pela conversão dos pecadores e em reparação pelos pecados cometidos contra o Imaculado Coração de Maria."</p>
+                    </div>
+                    <div class="oracao-actions">
+                        <button class="btn btn-dourado">Rezar Agora</button>
+                    </div>
+                </div>
+                
+                <div class="oracao-card">
+                    <div class="oracao-header">
+                        <i class="fas fa-rosary oracao-icon"></i>
+                        <h3>Terço Mariano</h3>
+                    </div>
+                    <div class="oracao-texto">
+                        <p>O Terço é uma poderosa oração mariana composta por 4 mistérios que contemplam a vida de Jesus e Maria. Reze conosco: "Graças derramou em mim o Onipotente, por isso o venero. Santo é o seu nome!"</p>
+                    </div>
+                    <div class="oracao-actions">
+                        <button class="btn btn-dourado">Rezar Terço</button>
+                    </div>
+                </div>
+                
+                <div class="oracao-card">
+                    <div class="oracao-header">
+                        <i class="fas fa-dove oracao-icon"></i>
+                        <h3>Oração pela Paz</h3>
+                    </div>
+                    <div class="oracao-texto">
+                        <p>"Senhor, fazei de mim um instrumento de vossa paz. Onde houver ódio, que eu leve o amor; onde houver ofensa, que eu leve o perdão; onde houver discórdia, que eu leve a união; onde houver dúvida, que eu leve a fé."</p>
+                    </div>
+                    <div class="oracao-actions">
+                        <button class="btn btn-dourado">Rezar pela Paz</button>
+                    </div>
+                </div>
+                
+                <div class="oracao-card">
+                    <div class="oracao-header">
+                        <i class="fas fa-school oracao-icon"></i>
+                        <h3>Oração da Escola Marista</h3>
+                    </div>
+                    <div class="oracao-texto">
+                        <p>"Ó bom Jesus, que chamastes Marcelino Champagnat para fundar a Família Marista, abençoai nossa escola, nossos educadores e estudantes. Fazei de nosso colégio um lugar de sabedoria, fé e amor, onde todos cresçam em conhecimento e virtude."</p>
+                    </div>
+                    <div class="oracao-actions">
+                        <button class="btn btn-dourado">Rezar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer id="contato">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Horários de Missa</h3>
+                    <p>Domingos: 8h, 10h, 19h</p>
+                    <p>Segunda a Sexta: 7h, 12h, 18h</p>
+                    <p>Sábados: 8h, 17h</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Escola Marista - Santuário de Fátima</p>
+                    <p><i class="fas fa-phone"></i> (11) 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> santuario@escolamarista.edu.br</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Pastoral Escolar</h3>
+                    <p>Pe. João Silva - Coordenador</p>
+                    <p>Ir. Maria Santos - Animadora</p>
+                    <p>Encontros: Quintas-feiras, 15h</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Siga-nos</h3>
+                    <p>Conecte-se conosco nas redes sociais</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Santuário de Fátima - Escola Marista. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        document.getElementById('mobileMenu').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+        
+        // Animação suave ao rolar para as seções
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Efeito de destaque nas orações ao clicar
+        document.querySelectorAll('.btn-dourado').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.oracao-card');
+                card.style.boxShadow = '0 0 15px rgba(184, 134, 11, 0.5)';
+                setTimeout(() => {
+                    card.style.boxShadow = '';
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
